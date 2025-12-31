@@ -345,9 +345,10 @@
             </div>
             
             <div class="music-player">
+                <!-- 使用网易云音乐官方推荐的iframe代码 -->
                 <iframe id="musicIframe" frameborder="no" border="0" marginwidth="0" marginheight="0" 
                         width="100%" height="86" 
-                        src="//music.163.com/outchain/player?type=2&id=1966112474&auto=1&height=66"></iframe>
+                        src="//music.163.com/outchain/player?type=2&id=1966112474&auto=1&height=66&bg=e8e8e8"></iframe>
             </div>
         </div>
     </div>
@@ -415,14 +416,16 @@
                 // 2. 显示生日页面
                 birthdayContainer.style.display = 'flex';
                 
-                // 3. 延迟加载音乐播放器以确保用户交互已触发
-                setTimeout(function() {
-                    const iframe = document.getElementById('musicIframe');
-                    // 重新加载iframe以确保播放
+                // 3. 重新加载iframe以确保自动播放
+                const iframe = document.getElementById('musicIframe');
+                if (iframe) {
+                    // 保存当前src
                     const currentSrc = iframe.src;
+                    // 临时清空src
                     iframe.src = '';
+                    // 重新设置src以触发加载
                     iframe.src = currentSrc;
-                }, 100);
+                }
                 
                 // 4. 创建彩带效果
                 createConfetti();
@@ -456,5 +459,3 @@
     </script>
 </body>
 </html>
-
-
