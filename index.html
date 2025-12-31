@@ -1,44 +1,120 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
+    <!-- 关键：视口设置，确保页面缩放适应设备宽度[citation:7] -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hello Miku</title>
+    <title>生日快乐！</title>
     <style>
-
-        body {
-            background-color: #f0f8ff; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            height: 100vh; 
-            margin: 0; 
-            font-family: Arial, sans-serif; 
-        }    
-        h1 {
-            color: #4682b4; 
-            font-size: 3em; 
-            font-weight: bold; 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to bottom right, #ffafbd, #ffc3a0);
+            color: #333;
+            /* 关键：强制横屏时高度为100vw，宽度为100vh，实现横屏布局 */
+            width: 100vh;
+            height: 100vw;
+            /* 将页面旋转90度，模拟横屏效果 */
+            transform: rotate(90deg) translate(0, -100%);
+            transform-origin: 0 0;
+            position: absolute;
+            overflow-x: hidden;
+        }
+        /* 内容容器，旋转回来后正常显示 */
+        .container {
+            width: 100vw;
+            height: 100vh;
+            transform: rotate(-90deg) translate(-100vh, 0);
+            transform-origin: 0 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #d32f2f;
+        }
+        .photo-frame {
+            width: 80%;
+            max-width: 500px;
+            border: 15px solid #fff;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        .photo-frame img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .message {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            max-width: 600px;
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
+        /* 横屏专属样式（可在此添加横屏下的特殊布局） */
+        @media screen and (orientation: landscape) {
+            body {
+                /* 横屏时可调整背景或其他样式 */
+                background: linear-gradient(to right, #ffafbd, #ffc3a0);
+            }
+        }
     </style>
+    <!-- 引入 APlayer 的 CSS 文件[citation:10] -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
 </head>
 <body>
+    <div class="container">
+        <h1>🎉 生日快乐！ 🎂</h1>
+        <div class="photo-frame">
+            <!-- 请将 src 属性替换为你朋友的图片链接 -->
+            <img src="https://via.placeholder.com/500x300/FFB6C1/FFFFFF?text=Happy+Birthday+Photo" alt="生日照片">
+        </div>
+        <div class="message">
+            <p>亲爱的朋友，</p>
+            <p>在这个特别的日子里，祝你生日快乐！愿你所有的愿望都成真，未来的每一天都充满欢笑和阳光。</p>
+            <p>—— 你的朋友</p>
+        </div>
+        <!-- APlayer 播放器容器[citation:10] -->
+        <div id="aplayer"></div>
+    </div>
 
-    <h1>Hello Miku</h1>
-    <img src="https://tse3-mm.cn.bing.net/th/id/OIP-C.1wkSt9hLlLH2wWpPPZB3YgHaEK?rs=1&pid=ImgDetMain" alt="">
-        <style>
-        img{
-     wide:250px;
-     height:250px;
-     margin-left:300px;
-     margin-top:300px;       
-            
-            
-
-
-            
-        }
-
+    <!-- 引入 APlayer 的 JS 文件[citation:10] -->
+    <script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
+    <script>
+        // 初始化 APlayer 播放器[citation:10]
+        const ap = new APlayer({
+            container: document.getElementById('aplayer'),
+            audio: [{
+                name: 'Blessing',
+                artist: 'Vocaloid (术力口)',
+                url: 'https://music.163.com/#/song?id=1966112474',
+                cover: 'https://via.placeholder.com/300x300/4A90E2/FFFFFF?text=Blessing+Cover'
+            }],
+            // 设置自动播放（注意：移动端浏览器可能限制此功能[citation:6][citation:8][citation:10]）
+            autoplay: true,
+            // 设置循环播放
+            loop: 'all',
+            // 设置初始音量
+            volume: 0.7,
+            // 将播放器固定在底部
+            fixed: true,
+            // 设置主题颜色
+            theme: '#ff6b6b'
+        });
+    </script>
 </body>
 </html>
