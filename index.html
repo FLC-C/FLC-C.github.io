@@ -75,7 +75,7 @@
             margin: 20px 0;
             position: relative;
             overflow: hidden;
-            backdrop-filter: blur(2px);
+            backdrop-filter: blur(1px);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             border: 2px solid rgba(255, 255, 255, 0.4); /* 恢复原来的白色半透明边框 */
         }
@@ -93,7 +93,13 @@
             font-size: 3rem;
             margin-bottom: 20px;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-            animation: textGradientFlow 4s linear infinite;
+            animation: textGradientFlow 5s linear infinite;
+        }
+
+         .cake-emoji {
+            font-size: 2.5rem;
+            animation: bounce 2s infinite;
+            filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.2));
         }
 
         @keyframes textGradientFlow {
@@ -107,16 +113,17 @@
             font-family: 'Comic Sans MS', 'Comic Sans', cursive, 'Arial', sans-serif;
             font-size: 1.5rem;
             background: linear-gradient(45deg, 
-                #1e3c72, #2a5298, #3a7bd5, #00d2ff,
-                #1e3c72, #2a5298, #3a7bd5, #00d2ff);
-            background-size: 400% 400%;
+                #3366ff, #4477ee, #5588dd, 
+                #6633cc, #7744bb, #8855aa,
+                #3366ff, #4477ee, #5588dd);
+            background-size: 300% 300%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             margin-bottom: 20px;
             line-height: 1.6;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-            animation: bluePurpleFlow 6s linear infinite;
+            animation: bluePurpleFlow 5s linear infinite;
         }
 
         @keyframes bluePurpleFlow {
@@ -128,9 +135,10 @@
         .message {
             font-family: 'Comic Sans MS', 'Comic Sans', cursive, 'Arial', sans-serif;
             background: linear-gradient(45deg, 
-                #6a5acd, #7b68ee, #9370db, #8a2be2, 
-                #6a5acd, #7b68ee, #9370db, #8a2be2);
-            background-size: 400% 400%;
+                #33aaff, #44bbff, #55ccff, 
+                #66ccff, #77ddff, #88eeff,
+                #33aaff, #44bbff, #55ccff);
+            background-size: 300% 300%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -138,13 +146,18 @@
             font-size: 1.2rem;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
             margin-bottom: 20px;
-            animation: messageFlow 5s linear infinite;
+            animation: blueFlow 4s linear infinite;
         }
 
-        @keyframes messageFlow {
+       @keyframes blueFlow {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
+        }
+
+              @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
 
         .music-player {
@@ -240,7 +253,9 @@
     <!-- 生日页面 -->
     <div class="birthday-container" id="birthdayContainer">
         <div class="content">
-            <h1>生日快乐！</h1>
+            <h1>
+    <span class="text-content">生日快乐！</span>
+</h1>
             <div class="birthday-text">
                 愿你的每一天都像今天一样充满欢笑和幸福！
             </div>
