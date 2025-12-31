@@ -52,15 +52,16 @@
             opacity: 1;
         }
 
-        /* 横屏优先的生日页面样式 */
+        /* 生日页面样式 */
         .birthday-container {
             width: 100%;
             height: 100vh;
             display: flex;
-            flex-direction: row; /* 横向布局 */
-            justify-content: space-around;
+            flex-direction: column;
+            justify-content: center;
             align-items: center;
             padding: 20px;
+            text-align: center;
             position: relative;
             z-index: 10;
         }
@@ -68,10 +69,10 @@
         .content {
             background: rgba(255, 255, 255, 0.85);
             border-radius: 20px;
-            padding: 30px;
-            width: 45%;
-            max-width: 400px;
-            margin: 0 10px;
+            padding: 40px;
+            width: 90%;
+            max-width: 600px;
+            margin: 20px 0;
             position: relative;
             overflow: hidden;
             backdrop-filter: blur(10px);
@@ -85,8 +86,8 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            font-size: 2.5rem;
-            margin-bottom: 15px;
+            font-size: 3rem;
+            margin-bottom: 20px;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.05);
             animation: gradientShift 3s ease-in-out infinite;
         }
@@ -98,14 +99,14 @@
 
         .birthday-text {
             font-family: 'Comic Sans MS', 'Comic Sans', cursive, 'Arial', sans-serif;
-            font-size: 1.2rem;
+            font-size: 1.5rem;
             background: linear-gradient(45deg, 
                 #ffcccb, #ffddc1, #e6f7ff, #d1e7dd, #c7ceea, #e0e6ff, #ffcccb);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 15px;
-            line-height: 1.5;
+            margin-bottom: 20px;
+            line-height: 1.6;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05);
             animation: textGlow 3s ease-in-out infinite alternate;
         }
@@ -123,94 +124,72 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
             font-style: italic;
-            font-size: 1rem;
+            font-size: 1.2rem;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05);
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
         .music-player {
-            margin: 10px 0;
-            padding: 8px;
+            margin: 15px 0;
+            padding: 10px;
             background: rgba(255, 255, 255, 0.9);
-            border-radius: 8px;
+            border-radius: 10px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
             width: 100%;
         }
 
-        /* 竖屏时隐藏内容 */
-        @media screen and (orientation: portrait) {
-            .birthday-container {
-                display: none;
-            }
-        }
-
-        /* 横屏时显示内容 */
+        /* 横屏适配 */
         @media screen and (orientation: landscape) {
             .birthday-container {
-                display: flex;
-            }
-        }
-
-        /* 响应式调整 */
-        @media (max-width: 1024px) {
-            .birthday-container {
                 flex-direction: row;
-                padding: 15px;
             }
             
             .content {
-                width: 45%;
-                padding: 25px;
+                width: 50%;
+                margin: 0;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .birthday-text {
+                font-size: 1.3rem;
             }
         }
 
+        /* 响应式字体 */
         @media (max-width: 768px) {
-            .birthday-container {
-                flex-direction: row;
-                padding: 10px;
-            }
-            
-            .content {
-                width: 42%;
-                padding: 20px;
-            }
-            
             h1 {
                 font-size: 2rem;
             }
             
             .birthday-text {
-                font-size: 1.1rem;
+                font-size: 1.2rem;
             }
         }
 
         @media (max-width: 480px) {
-            .birthday-container {
-                flex-direction: row;
-                padding: 5px;
-            }
-            
-            .content {
-                width: 40%;
-                padding: 15px;
-            }
-            
             h1 {
                 font-size: 1.5rem;
             }
             
             .birthday-text {
-                font-size: 0.9rem;
+                font-size: 1rem;
+            }
+            
+            .content {
+                padding: 20px;
             }
         }
 
         /* 装饰性元素 */
         .hat {
             position: absolute;
-            top: 15px;
+            top: 20px;
             left: 50%;
             transform: translateX(-50%);
-            font-size: 2.5rem;
+            font-size: 3rem;
             animation: bounce 2s infinite;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
             z-index: 5;
@@ -240,10 +219,9 @@
     </style>
 </head>
 <body>
-    <!-- 横屏生日页面 -->
+    <!-- 生日页面 -->
     <div class="birthday-container" id="birthdayContainer">
         <div class="content">
-            <div class="hat">🎂</div>
             <h1>生日快乐！🎉</h1>
             <div class="birthday-text">
                 愿你的每一天都像今天一样充满欢笑和幸福！
@@ -256,26 +234,8 @@
             </div>
             
             <div class="music-player">
+                <!-- 使用网易云音乐官方推荐的iframe代码 -->
                 <iframe id="musicIframe" frameborder="no" border="0" marginwidth="0" marginheight="0" 
-                        width="100%" height="86" 
-                        src="//music.163.com/outchain/player?type=2&id=1966112474&auto=1&height=66&bg=e8e8e8"></iframe>
-            </div>
-        </div>
-        
-        <div class="content">
-            <h1>Special for You</h1>
-            <div class="birthday-text">
-                今天是属于你的特别日子！
-            </div>
-            <div class="birthday-text">
-                愿你被爱包围，被幸福围绕！
-            </div>
-            <div class="message">
-                愿所有美好如期而至 🌟
-            </div>
-            
-            <div class="music-player">
-                <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" 
                         width="100%" height="86" 
                         src="//music.163.com/outchain/player?type=2&id=1966112474&auto=1&height=66&bg=e8e8e8"></iframe>
             </div>
@@ -332,6 +292,17 @@
             
             // 每5秒切换一次背景
             setInterval(changeBackgroundImage, 5000);
+            
+            // 重新加载iframe以确保自动播放
+            const iframe = document.getElementById('musicIframe');
+            if (iframe) {
+                // 保存当前src
+                const currentSrc = iframe.src;
+                // 临时清空src
+                iframe.src = '';
+                // 重新设置src以触发加载
+                iframe.src = currentSrc;
+            }
             
             // 创建彩带效果
             function createConfetti() {
