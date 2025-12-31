@@ -241,6 +241,7 @@
             width: 100%;
         }
 
+        /* 横屏适配 */
         @media screen and (orientation: landscape) {
             .birthday-container {
                 flex-direction: row;
@@ -260,6 +261,7 @@
             }
         }
 
+        /* 响应式字体 */
         @media (max-width: 768px) {
             h1 {
                 font-size: 2rem;
@@ -281,6 +283,40 @@
             
             .content {
                 padding: 20px;
+            }
+        }
+
+        /* 装饰性元素 */
+        .hat {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 3rem;
+            animation: bounce 2s infinite;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            z-index: 5;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-10px); }
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #f00;
+            border-radius: 50%;
+            animation: fall linear forwards;
+            z-index: 100;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
             }
         }
     </style>
@@ -379,28 +415,16 @@
                 // 2. 显示生日页面
                 birthdayContainer.style.display = 'flex';
                 
-                // 3. 播放音乐（在用户点击后，浏览器允许自动播放）
-                const iframe = document.getElementById('musicIframe');
-                if (iframe) {
-                    // 尝试触发播放（虽然参数有auto=1，但浏览器需要用户交互）
-                    // 由于我们是在用户点击后显示的，所以浏览器允许自动播放
-                    // 无需额外操作
-                }
+                // 3. 延迟加载音乐播放器以确保用户交互已触发
+                setTimeout(function() {
+                    const iframe = document.getElementById('musicIframe');
+                    // 重新加载iframe以确保播放
+                    const currentSrc = iframe.src;
+                    iframe.src = '';
+                    iframe.src = currentSrc;
+                }, 100);
                 
-                // 4. 添加生日帽动画
-                const hat = document.createElement('div');
-                hat.className = 'hat';
-                hat.textContent = '🎂';
-                hat.style.top = '10px';
-                hat.style.fontSize = '3.5rem';
-                document.body.appendChild(hat);
-                
-                // 5. 5秒后移除生日帽
-                setTimeout(() => {
-                    hat.remove();
-                }, 5000);
-                
-                // 6. 创建彩带效果
+                // 4. 创建彩带效果
                 createConfetti();
                 setInterval(createConfetti, 10000);
             });
@@ -418,6 +442,9 @@
                     confetti.style.height = Math.random() * 10 + 5 + 'px';
                     confetti.style.animationDuration = Math.random() * 3 + 2 + 's';
                     
+                    // 添加随机起始位置
+                    confetti.style.top = '-10px';
+                    
                     document.body.appendChild(confetti);
                     
                     setTimeout(() => {
@@ -429,3 +456,5 @@
     </script>
 </body>
 </html>
+
+
