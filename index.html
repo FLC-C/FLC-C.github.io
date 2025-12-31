@@ -82,13 +82,13 @@
         h1 {
             font-family: 'Comic Sans MS', 'Comic Sans', cursive, 'Arial', sans-serif;
             background: linear-gradient(45deg, 
-                #ffcccb, #ffddc1, #e6f7ff, #d1e7dd, #c7ceea, #e0e6ff, #ffcccb);
+                #ff6b6b, #ff8e8e, #ffb6c1, #d1e7ff, #a7c7e7, #96b8e0, #8a6bb9);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             font-size: 3rem;
             margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.05);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
             animation: gradientShift 3s ease-in-out infinite;
         }
 
@@ -101,41 +101,41 @@
             font-family: 'Comic Sans MS', 'Comic Sans', cursive, 'Arial', sans-serif;
             font-size: 1.5rem;
             background: linear-gradient(45deg, 
-                #ffcccb, #ffddc1, #e6f7ff, #d1e7dd, #c7ceea, #e0e6ff, #ffcccb);
+                #6a5acd, #7b68ee, #9370db, #8a2be2, #6a5acd, #7b68ee, #9370db);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             margin-bottom: 20px;
             line-height: 1.6;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
             animation: textGlow 3s ease-in-out infinite alternate;
         }
 
         @keyframes textGlow {
-            from { text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05), 0 0 10px rgba(255, 255, 255, 0.3); }
-            to { text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05), 0 0 20px rgba(255, 255, 255, 0.5); }
+            from { text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1), 0 0 10px rgba(106, 90, 205, 0.3); }
+            to { text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1), 0 0 20px rgba(106, 90, 205, 0.5); }
         }
 
         .message {
             font-family: 'Comic Sans MS', 'Comic Sans', cursive, 'Arial', sans-serif;
             background: linear-gradient(45deg, 
-                #ffcccb, #ffddc1, #e6f7ff, #d1e7dd, #c7ceea, #e0e6ff, #ffcccb);
+                #6a5acd, #7b68ee, #9370db, #8a2be2, #6a5acd, #7b68ee, #9370db);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             font-style: italic;
             font-size: 1.2rem;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
             margin-bottom: 20px;
         }
 
         .music-player {
-            margin: 15px 0;
-            padding: 10px;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-            width: 100%;
+            position: absolute;
+            top: -200px; /* 移到屏幕外 */
+            left: -200px; /* 移到屏幕外 */
+            opacity: 0; /* 完全透明 */
+            pointer-events: none; /* 不响应鼠标事件 */
+            z-index: -1; /* 移到最底层 */
         }
 
         /* 横屏适配 */
