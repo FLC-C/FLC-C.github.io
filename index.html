@@ -52,119 +52,15 @@
             opacity: 1;
         }
 
-        /* 引导页面样式 */
-        .welcome-container {
-            width: 100%;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            text-align: center;
-            position: relative;
-            z-index: 10;
-            background: linear-gradient(135deg, #ffebcc, #ffd1b5);
-            color: #d35400;
-            font-family: 'Comic Sans MS', 'Comic Sans', cursive, Arial, sans-serif;
-            animation: fadeIn 1.5s ease-in-out;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .welcome-title {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-            background: linear-gradient(45deg, #ffcccb, #ffddc1, #e6f7ff, #d1e7dd);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: gradientShift 5s ease-in-out infinite;
-        }
-
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 200% 50%; }
-        }
-
-        .welcome-subtitle {
-            font-size: 1.8rem;
-            margin-bottom: 40px;
-            line-height: 1.5;
-            color: #c0392b;
-        }
-
-        .start-button {
-            background: linear-gradient(45deg, #ff6b6b, #ff9e9e);
-            color: white;
-            border: none;
-            padding: 25px 60px;
-            font-size: 2.2rem;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.4);
-            font-family: 'Comic Sans MS', 'Comic Sans', cursive, Arial, sans-serif;
-            letter-spacing: 1px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .start-button:after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transform: translateX(-100%);
-            transition: transform 0.5s ease;
-        }
-
-        .start-button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 15px 40px rgba(255, 107, 107, 0.6);
-        }
-
-        .start-button:hover:after {
-            transform: translateX(0);
-        }
-
-        .start-button:active {
-            transform: scale(0.98);
-        }
-
-        .welcome-hat {
-            position: absolute;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 3.5rem;
-            animation: bounce 2s infinite;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-            z-index: 5;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateX(-50%) translateY(0); }
-            50% { transform: translateX(-50%) translateY(-15px); }
-        }
-
-        /* 生日页面样式 */
+        /* 横屏优先的生日页面样式 */
         .birthday-container {
             width: 100%;
             height: 100vh;
-            display: none;
-            flex-direction: column;
-            justify-content: center;
+            display: flex;
+            flex-direction: row; /* 横向布局 */
+            justify-content: space-around;
             align-items: center;
             padding: 20px;
-            text-align: center;
             position: relative;
             z-index: 10;
         }
@@ -172,10 +68,10 @@
         .content {
             background: rgba(255, 255, 255, 0.85);
             border-radius: 20px;
-            padding: 40px;
-            width: 90%;
-            max-width: 600px;
-            margin: 20px 0;
+            padding: 30px;
+            width: 45%;
+            max-width: 400px;
+            margin: 0 10px;
             position: relative;
             overflow: hidden;
             backdrop-filter: blur(10px);
@@ -189,8 +85,8 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            font-size: 3rem;
-            margin-bottom: 20px;
+            font-size: 2.5rem;
+            margin-bottom: 15px;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.05);
             animation: gradientShift 3s ease-in-out infinite;
         }
@@ -202,14 +98,14 @@
 
         .birthday-text {
             font-family: 'Comic Sans MS', 'Comic Sans', cursive, 'Arial', sans-serif;
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             background: linear-gradient(45deg, 
                 #ffcccb, #ffddc1, #e6f7ff, #d1e7dd, #c7ceea, #e0e6ff, #ffcccb);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 20px;
-            line-height: 1.6;
+            margin-bottom: 15px;
+            line-height: 1.5;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05);
             animation: textGlow 3s ease-in-out infinite alternate;
         }
@@ -227,72 +123,94 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
             font-style: italic;
-            font-size: 1.2rem;
+            font-size: 1rem;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05);
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         .music-player {
-            margin: 15px 0;
-            padding: 10px;
+            margin: 10px 0;
+            padding: 8px;
             background: rgba(255, 255, 255, 0.9);
-            border-radius: 10px;
+            border-radius: 8px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
             width: 100%;
         }
 
-        /* 横屏适配 */
-        @media screen and (orientation: landscape) {
+        /* 竖屏时隐藏内容 */
+        @media screen and (orientation: portrait) {
             .birthday-container {
-                flex-direction: row;
-            }
-            
-            .content {
-                width: 50%;
-                margin: 0;
-            }
-            
-            h1 {
-                font-size: 2.5rem;
-            }
-            
-            .birthday-text {
-                font-size: 1.3rem;
+                display: none;
             }
         }
 
-        /* 响应式字体 */
+        /* 横屏时显示内容 */
+        @media screen and (orientation: landscape) {
+            .birthday-container {
+                display: flex;
+            }
+        }
+
+        /* 响应式调整 */
+        @media (max-width: 1024px) {
+            .birthday-container {
+                flex-direction: row;
+                padding: 15px;
+            }
+            
+            .content {
+                width: 45%;
+                padding: 25px;
+            }
+        }
+
         @media (max-width: 768px) {
+            .birthday-container {
+                flex-direction: row;
+                padding: 10px;
+            }
+            
+            .content {
+                width: 42%;
+                padding: 20px;
+            }
+            
             h1 {
                 font-size: 2rem;
             }
             
             .birthday-text {
-                font-size: 1.2rem;
+                font-size: 1.1rem;
             }
         }
 
         @media (max-width: 480px) {
+            .birthday-container {
+                flex-direction: row;
+                padding: 5px;
+            }
+            
+            .content {
+                width: 40%;
+                padding: 15px;
+            }
+            
             h1 {
                 font-size: 1.5rem;
             }
             
             .birthday-text {
-                font-size: 1rem;
-            }
-            
-            .content {
-                padding: 20px;
+                font-size: 0.9rem;
             }
         }
 
         /* 装饰性元素 */
         .hat {
             position: absolute;
-            top: 20px;
+            top: 15px;
             left: 50%;
             transform: translateX(-50%);
-            font-size: 3rem;
+            font-size: 2.5rem;
             animation: bounce 2s infinite;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
             z-index: 5;
@@ -322,17 +240,10 @@
     </style>
 </head>
 <body>
-    <!-- 引导页面 -->
-    <div class="welcome-container" id="welcomeContainer">
-        <div class="welcome-hat">🎂</div>
-        <h1 class="welcome-title">生日快乐！</h1>
-        <p class="welcome-subtitle">点击下方按钮开始你的生日惊喜</p>
-        <button class="start-button" id="startButton">请按我</button>
-    </div>
-    
-    <!-- 生日页面 -->
+    <!-- 横屏生日页面 -->
     <div class="birthday-container" id="birthdayContainer">
         <div class="content">
+            <div class="hat">🎂</div>
             <h1>生日快乐！🎉</h1>
             <div class="birthday-text">
                 愿你的每一天都像今天一样充满欢笑和幸福！
@@ -345,8 +256,26 @@
             </div>
             
             <div class="music-player">
-                <!-- 使用网易云音乐官方推荐的iframe代码 -->
                 <iframe id="musicIframe" frameborder="no" border="0" marginwidth="0" marginheight="0" 
+                        width="100%" height="86" 
+                        src="//music.163.com/outchain/player?type=2&id=1966112474&auto=1&height=66&bg=e8e8e8"></iframe>
+            </div>
+        </div>
+        
+        <div class="content">
+            <h1>Special for You</h1>
+            <div class="birthday-text">
+                今天是属于你的特别日子！
+            </div>
+            <div class="birthday-text">
+                愿你被爱包围，被幸福围绕！
+            </div>
+            <div class="message">
+                愿所有美好如期而至 🌟
+            </div>
+            
+            <div class="music-player">
+                <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" 
                         width="100%" height="86" 
                         src="//music.163.com/outchain/player?type=2&id=1966112474&auto=1&height=66&bg=e8e8e8"></iframe>
             </div>
@@ -355,10 +284,6 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const welcomeContainer = document.getElementById('welcomeContainer');
-            const birthdayContainer = document.getElementById('birthdayContainer');
-            const startButton = document.getElementById('startButton');
-            
             // 背景图片数组
             const backgroundImages = [
                 'https://img.alicdn.com/imgextra/i1/O1CN01kZ5v6L1dR4z6X2X9W_!!6000000003542-2-tps-1920-1080.png',
@@ -408,30 +333,6 @@
             // 每5秒切换一次背景
             setInterval(changeBackgroundImage, 5000);
             
-            // 开始按钮点击事件
-            startButton.addEventListener('click', function() {
-                // 1. 隐藏引导页面
-                welcomeContainer.style.display = 'none';
-                
-                // 2. 显示生日页面
-                birthdayContainer.style.display = 'flex';
-                
-                // 3. 重新加载iframe以确保自动播放
-                const iframe = document.getElementById('musicIframe');
-                if (iframe) {
-                    // 保存当前src
-                    const currentSrc = iframe.src;
-                    // 临时清空src
-                    iframe.src = '';
-                    // 重新设置src以触发加载
-                    iframe.src = currentSrc;
-                }
-                
-                // 4. 创建彩带效果
-                createConfetti();
-                setInterval(createConfetti, 10000);
-            });
-            
             // 创建彩带效果
             function createConfetti() {
                 const colors = ['#ffcccb', '#ffddc1', '#e6f7ff', '#d1e7dd', '#c7ceea', '#e0e6ff'];
@@ -455,6 +356,14 @@
                     }, 5000);
                 }
             }
+            
+            // 页面加载时的欢迎效果
+            setTimeout(() => {
+                createConfetti();
+            }, 1000);
+            
+            // 每隔一段时间创建彩带效果
+            setInterval(createConfetti, 10000);
         });
     </script>
 </body>
