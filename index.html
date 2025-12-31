@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>生日快乐！</title>
     <style>
+        /* 重置默认样式 */
         * {
             margin: 0;
             padding: 0;
@@ -25,6 +26,7 @@
             transition: background-image 2s ease-in-out;
         }
 
+        /* 背景容器 */
         .background-container {
             position: fixed;
             top: 0;
@@ -50,11 +52,114 @@
             opacity: 1;
         }
 
-        .container {
+        /* 引导页面样式 */
+        .welcome-container {
             width: 100%;
-            max-width: 1000px;
             height: 100vh;
             display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+            background: linear-gradient(135deg, #ffebcc, #ffd1b5);
+            color: #d35400;
+            font-family: 'Comic Sans MS', 'Comic Sans', cursive, Arial, sans-serif;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .welcome-title {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(45deg, #ffcccb, #ffddc1, #e6f7ff, #d1e7dd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 5s ease-in-out infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
+        }
+
+        .welcome-subtitle {
+            font-size: 1.8rem;
+            margin-bottom: 40px;
+            line-height: 1.5;
+            color: #c0392b;
+        }
+
+        .start-button {
+            background: linear-gradient(45deg, #ff6b6b, #ff9e9e);
+            color: white;
+            border: none;
+            padding: 25px 60px;
+            font-size: 2.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.4);
+            font-family: 'Comic Sans MS', 'Comic Sans', cursive, Arial, sans-serif;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .start-button:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.5s ease;
+        }
+
+        .start-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(255, 107, 107, 0.6);
+        }
+
+        .start-button:hover:after {
+            transform: translateX(0);
+        }
+
+        .start-button:active {
+            transform: scale(0.98);
+        }
+
+        .welcome-hat {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 3.5rem;
+            animation: bounce 2s infinite;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            z-index: 5;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-15px); }
+        }
+
+        /* 生日页面样式 */
+        .birthday-container {
+            width: 100%;
+            height: 100vh;
+            display: none;
             flex-direction: column;
             justify-content: center;
             align-items: center;
@@ -65,7 +170,7 @@
         }
 
         .content {
-            background: rgba(255, 255, 255, 0.85); /* 更明亮的半透明白色背景 */
+            background: rgba(255, 255, 255, 0.85);
             border-radius: 20px;
             padding: 40px;
             width: 90%;
@@ -136,12 +241,9 @@
             width: 100%;
         }
 
-        /* 横屏适配 */
         @media screen and (orientation: landscape) {
-            .container {
+            .birthday-container {
                 flex-direction: row;
-                justify-content: center;
-                padding: 20px;
             }
             
             .content {
@@ -158,7 +260,6 @@
             }
         }
 
-        /* 响应式字体 */
         @media (max-width: 768px) {
             h1 {
                 font-size: 2rem;
@@ -182,49 +283,19 @@
                 padding: 20px;
             }
         }
-
-        /* 装饰性元素 */
-        .hat {
-            position: absolute;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 3rem;
-            animation: bounce 2s infinite;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-            z-index: 5;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateX(-50%) translateY(0); }
-            50% { transform: translateX(-50%) translateY(-10px); }
-        }
-
-        .confetti {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background-color: #f00;
-            border-radius: 50%;
-            animation: fall linear forwards;
-        }
-
-        @keyframes fall {
-            to {
-                transform: translateY(100vh) rotate(360deg);
-                opacity: 0;
-            }
-        }
     </style>
 </head>
 <body>
-    <div class="background-container" id="backgroundContainer">
-        <!-- 动态背景图片将通过JavaScript添加 -->
+    <!-- 引导页面 -->
+    <div class="welcome-container" id="welcomeContainer">
+        <div class="welcome-hat">🎂</div>
+        <h1 class="welcome-title">生日快乐！</h1>
+        <p class="welcome-subtitle">点击下方按钮开始你的生日惊喜</p>
+        <button class="start-button" id="startButton">请按我</button>
     </div>
     
-    <div class="hat">🎂</div>
-    
-    <div class="container">
+    <!-- 生日页面 -->
+    <div class="birthday-container" id="birthdayContainer">
         <div class="content">
             <h1>生日快乐！🎉</h1>
             <div class="birthday-text">
@@ -236,9 +307,9 @@
             <div class="message">
                 祝你拥有一个难忘的生日！🎈
             </div>
+            
             <div class="music-player">
-                <!-- 网易云音乐播放器 -->
-                <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" 
+                <iframe id="musicIframe" frameborder="no" border="0" marginwidth="0" marginheight="0" 
                         width="100%" height="86" 
                         src="//music.163.com/outchain/player?type=2&id=1966112474&auto=1&height=66"></iframe>
             </div>
@@ -247,6 +318,10 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            const welcomeContainer = document.getElementById('welcomeContainer');
+            const birthdayContainer = document.getElementById('birthdayContainer');
+            const startButton = document.getElementById('startButton');
+            
             // 背景图片数组
             const backgroundImages = [
                 'https://img.alicdn.com/imgextra/i1/O1CN01kZ5v6L1dR4z6X2X9W_!!6000000003542-2-tps-1920-1080.png',
@@ -256,11 +331,15 @@
                 'https://img.alicdn.com/imgextra/i5/O1CN01kZ5v6L1dR4z6X2X9A_!!6000000003546-2-tps-1920-1080.png'
             ];
             
-            const backgroundContainer = document.getElementById('backgroundContainer');
+            // 获取背景容器元素
+            const backgroundContainer = document.createElement('div');
+            backgroundContainer.className = 'background-container';
+            document.body.appendChild(backgroundContainer);
+            
             let currentImageIndex = 0;
             let imageElements = [];
             
-            // 创建背景图片元素
+            // 创建背景图片
             backgroundImages.forEach((src, index) => {
                 const img = document.createElement('div');
                 img.className = 'background-image';
@@ -269,7 +348,7 @@
                 imageElements.push(img);
             });
             
-            // 显示当前图片
+            // 显示背景图片
             function showBackgroundImage(index) {
                 imageElements.forEach((img, i) => {
                     if (i === index) {
@@ -283,14 +362,48 @@
             // 初始显示第一张图片
             showBackgroundImage(currentImageIndex);
             
-            // 切换背景图片的函数
+            // 切换背景图片
             function changeBackgroundImage() {
                 currentImageIndex = (currentImageIndex + 1) % backgroundImages.length;
                 showBackgroundImage(currentImageIndex);
             }
             
-            // 每5秒切换一次背景图片
+            // 每5秒切换一次背景
             setInterval(changeBackgroundImage, 5000);
+            
+            // 开始按钮点击事件
+            startButton.addEventListener('click', function() {
+                // 1. 隐藏引导页面
+                welcomeContainer.style.display = 'none';
+                
+                // 2. 显示生日页面
+                birthdayContainer.style.display = 'flex';
+                
+                // 3. 播放音乐（在用户点击后，浏览器允许自动播放）
+                const iframe = document.getElementById('musicIframe');
+                if (iframe) {
+                    // 尝试触发播放（虽然参数有auto=1，但浏览器需要用户交互）
+                    // 由于我们是在用户点击后显示的，所以浏览器允许自动播放
+                    // 无需额外操作
+                }
+                
+                // 4. 添加生日帽动画
+                const hat = document.createElement('div');
+                hat.className = 'hat';
+                hat.textContent = '🎂';
+                hat.style.top = '10px';
+                hat.style.fontSize = '3.5rem';
+                document.body.appendChild(hat);
+                
+                // 5. 5秒后移除生日帽
+                setTimeout(() => {
+                    hat.remove();
+                }, 5000);
+                
+                // 6. 创建彩带效果
+                createConfetti();
+                setInterval(createConfetti, 10000);
+            });
             
             // 创建彩带效果
             function createConfetti() {
@@ -312,14 +425,6 @@
                     }, 5000);
                 }
             }
-            
-            // 页面加载时的欢迎效果
-            setTimeout(() => {
-                createConfetti();
-            }, 1000);
-            
-            // 每隔一段时间创建彩带效果
-            setInterval(createConfetti, 10000);
         });
     </script>
 </body>
