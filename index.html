@@ -2,8 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <!-- 关键：视口设置，确保页面缩放适应设备宽度[citation:7] -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>生日快乐！</title>
     <style>
         * {
@@ -11,109 +10,316 @@
             padding: 0;
             box-sizing: border-box;
         }
+
         body {
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(to bottom right, #ffafbd, #ffc3a0);
-            color: #333;
-            /* 关键：强制横屏时高度为100vw，宽度为100vh，实现横屏布局 */
-            width: 100vh;
-            height: 100vw;
-            /* 将页面旋转90度，模拟横屏效果 */
-            transform: rotate(90deg) translate(0, -100%);
-            transform-origin: 0 0;
-            position: absolute;
-            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            transition: background-image 2s ease-in-out;
         }
-        /* 内容容器，旋转回来后正常显示 */
+
+        .background-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .background-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 2s ease-in-out;
+        }
+
+        .background-image.active {
+            opacity: 1;
+        }
+
         .container {
-            width: 100vw;
+            width: 100%;
+            max-width: 1000px;
             height: 100vh;
-            transform: rotate(-90deg) translate(-100vh, 0);
-            transform-origin: 0 0;
             display: flex;
             flex-direction: column;
-            align-items: center;
             justify-content: center;
+            align-items: center;
             padding: 20px;
             text-align: center;
+            position: relative;
+            z-index: 10;
         }
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            color: #d32f2f;
-        }
-        .photo-frame {
-            width: 80%;
-            max-width: 500px;
-            border: 15px solid #fff;
-            border-radius: 10px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-            margin: 20px 0;
-            overflow: hidden;
-        }
-        .photo-frame img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-        .message {
-            background-color: rgba(255, 255, 255, 0.9);
-            padding: 20px;
-            border-radius: 15px;
-            margin: 20px 0;
+
+        .content {
+            background: rgba(255, 255, 255, 0.85); /* 更明亮的半透明白色背景 */
+            border-radius: 20px;
+            padding: 40px;
+            width: 90%;
             max-width: 600px;
-            font-size: 1.2rem;
-            line-height: 1.6;
+            margin: 20px 0;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         }
-        /* 横屏专属样式（可在此添加横屏下的特殊布局） */
+
+        h1 {
+            font-family: 'Comic Sans MS', 'Comic Sans', cursive, 'Arial', sans-serif;
+            background: linear-gradient(45deg, 
+                #ffcccb, #ffddc1, #e6f7ff, #d1e7dd, #c7ceea, #e0e6ff, #ffcccb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.05);
+            animation: gradientShift 3s ease-in-out infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
+        }
+
+        .birthday-text {
+            font-family: 'Comic Sans MS', 'Comic Sans', cursive, 'Arial', sans-serif;
+            font-size: 1.5rem;
+            background: linear-gradient(45deg, 
+                #ffcccb, #ffddc1, #e6f7ff, #d1e7dd, #c7ceea, #e0e6ff, #ffcccb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05);
+            animation: textGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes textGlow {
+            from { text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05), 0 0 10px rgba(255, 255, 255, 0.3); }
+            to { text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05), 0 0 20px rgba(255, 255, 255, 0.5); }
+        }
+
+        .message {
+            font-family: 'Comic Sans MS', 'Comic Sans', cursive, 'Arial', sans-serif;
+            background: linear-gradient(45deg, 
+                #ffcccb, #ffddc1, #e6f7ff, #d1e7dd, #c7ceea, #e0e6ff, #ffcccb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-style: italic;
+            font-size: 1.2rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
+        }
+
+        .music-player {
+            margin: 15px 0;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            width: 100%;
+        }
+
+        /* 横屏适配 */
         @media screen and (orientation: landscape) {
-            body {
-                /* 横屏时可调整背景或其他样式 */
-                background: linear-gradient(to right, #ffafbd, #ffc3a0);
+            .container {
+                flex-direction: row;
+                justify-content: center;
+                padding: 20px;
+            }
+            
+            .content {
+                width: 50%;
+                margin: 0;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .birthday-text {
+                font-size: 1.3rem;
+            }
+        }
+
+        /* 响应式字体 */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .birthday-text {
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            .birthday-text {
+                font-size: 1rem;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+        }
+
+        /* 装饰性元素 */
+        .hat {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 3rem;
+            animation: bounce 2s infinite;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            z-index: 5;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-10px); }
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #f00;
+            border-radius: 50%;
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
             }
         }
     </style>
-    <!-- 引入 APlayer 的 CSS 文件[citation:10] -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
 </head>
 <body>
+    <div class="background-container" id="backgroundContainer">
+        <!-- 动态背景图片将通过JavaScript添加 -->
+    </div>
+    
+    <div class="hat">🎂</div>
+    
     <div class="container">
-        <h1>🎉 生日快乐！ 🎂</h1>
-        <div class="photo-frame">
-            <!-- 请将 src 属性替换为你朋友的图片链接 -->
-            <img src="https://via.placeholder.com/500x300/FFB6C1/FFFFFF?text=Happy+Birthday+Photo" alt="生日照片">
+        <div class="content">
+            <h1>生日快乐！🎉</h1>
+            <div class="birthday-text">
+                愿你的每一天都像今天一样充满欢笑和幸福！
+            </div>
+            <div class="birthday-text">
+                愿所有的美好都如约而至，所有的梦想都能实现！
+            </div>
+            <div class="message">
+                祝你拥有一个难忘的生日！🎈
+            </div>
+            <div class="music-player">
+                <!-- 网易云音乐播放器 -->
+                <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" 
+                        width="100%" height="86" 
+                        src="//music.163.com/outchain/player?type=2&id=1966112474&auto=1&height=66"></iframe>
+            </div>
         </div>
-        <div class="message">
-            <p>亲爱的朋友，</p>
-            <p>在这个特别的日子里，祝你生日快乐！愿你所有的愿望都成真，未来的每一天都充满欢笑和阳光。</p>
-            <p>—— 你的朋友</p>
-        </div>
-        <!-- APlayer 播放器容器[citation:10] -->
-        <div id="aplayer"></div>
     </div>
 
-    <!-- 引入 APlayer 的 JS 文件[citation:10] -->
-    <script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
     <script>
-        // 初始化 APlayer 播放器[citation:10]
-        const ap = new APlayer({
-            container: document.getElementById('aplayer'),
-            audio: [{
-                name: 'Blessing',
-                artist: 'Vocaloid (术力口)',
-                url: 'https://music.163.com/#/song?id=1966112474',
-                cover: 'https://via.placeholder.com/300x300/4A90E2/FFFFFF?text=Blessing+Cover'
-            }],
-            // 设置自动播放（注意：移动端浏览器可能限制此功能[citation:6][citation:8][citation:10]）
-            autoplay: true,
-            // 设置循环播放
-            loop: 'all',
-            // 设置初始音量
-            volume: 0.7,
-            // 将播放器固定在底部
-            fixed: true,
-            // 设置主题颜色
-            theme: '#ff6b6b'
+        document.addEventListener('DOMContentLoaded', function() {
+            // 背景图片数组
+            const backgroundImages = [
+                'https://img.alicdn.com/imgextra/i1/O1CN01kZ5v6L1dR4z6X2X9W_!!6000000003542-2-tps-1920-1080.png',
+                'https://img.alicdn.com/imgextra/i2/O1CN01j2X4Y91dR4z6X2X9X_!!6000000003543-2-tps-1920-1080.png',
+                'https://img.alicdn.com/imgextra/i3/O1CN01kZ5v6L1dR4z6X2X9Y_!!6000000003544-2-tps-1920-1080.png',
+                'https://img.alicdn.com/imgextra/i4/O1CN01j2X4Y91dR4z6X2X9Z_!!6000000003545-2-tps-1920-1080.png',
+                'https://img.alicdn.com/imgextra/i5/O1CN01kZ5v6L1dR4z6X2X9A_!!6000000003546-2-tps-1920-1080.png'
+            ];
+            
+            const backgroundContainer = document.getElementById('backgroundContainer');
+            let currentImageIndex = 0;
+            let imageElements = [];
+            
+            // 创建背景图片元素
+            backgroundImages.forEach((src, index) => {
+                const img = document.createElement('div');
+                img.className = 'background-image';
+                img.style.backgroundImage = `url('${src}')`;
+                backgroundContainer.appendChild(img);
+                imageElements.push(img);
+            });
+            
+            // 显示当前图片
+            function showBackgroundImage(index) {
+                imageElements.forEach((img, i) => {
+                    if (i === index) {
+                        img.classList.add('active');
+                    } else {
+                        img.classList.remove('active');
+                    }
+                });
+            }
+            
+            // 初始显示第一张图片
+            showBackgroundImage(currentImageIndex);
+            
+            // 切换背景图片的函数
+            function changeBackgroundImage() {
+                currentImageIndex = (currentImageIndex + 1) % backgroundImages.length;
+                showBackgroundImage(currentImageIndex);
+            }
+            
+            // 每5秒切换一次背景图片
+            setInterval(changeBackgroundImage, 5000);
+            
+            // 创建彩带效果
+            function createConfetti() {
+                const colors = ['#ffcccb', '#ffddc1', '#e6f7ff', '#d1e7dd', '#c7ceea', '#e0e6ff'];
+                
+                for (let i = 0; i < 30; i++) {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + 'vw';
+                    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.width = Math.random() * 10 + 5 + 'px';
+                    confetti.style.height = Math.random() * 10 + 5 + 'px';
+                    confetti.style.animationDuration = Math.random() * 3 + 2 + 's';
+                    
+                    document.body.appendChild(confetti);
+                    
+                    setTimeout(() => {
+                        confetti.remove();
+                    }, 5000);
+                }
+            }
+            
+            // 页面加载时的欢迎效果
+            setTimeout(() => {
+                createConfetti();
+            }, 1000);
+            
+            // 每隔一段时间创建彩带效果
+            setInterval(createConfetti, 10000);
         });
     </script>
 </body>
