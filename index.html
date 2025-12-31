@@ -67,7 +67,7 @@
         }
 
         .content {
-            background: rgba(255, 255, 255, 0.85);
+            background: rgba(255, 255, 255, 0.3);
             border-radius: 20px;
             padding: 40px;
             width: 90%;
@@ -75,51 +75,62 @@
             margin: 20px 0;
             position: relative;
             overflow: hidden;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(2px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.4); /* 恢复原来的白色半透明边框 */
         }
 
+        /* 标题文字的彩色渐变流动效果 */
         h1 {
             font-family: 'Comic Sans MS', 'Comic Sans', cursive, 'Arial', sans-serif;
             background: linear-gradient(45deg, 
-                #ff6b6b, #ff8e8e, #ffb6c1, #d1e7ff, #a7c7e7, #96b8e0, #8a6bb9);
+                #ff0000, #ff9900, #ffff00, #00ff00, 
+                #0099ff, #6600ff, #ff00ff, #ff0000);
+            background-size: 400% 400%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             font-size: 3rem;
             margin-bottom: 20px;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-            animation: gradientShift 3s ease-in-out infinite;
+            animation: textGradientFlow 4s linear infinite;
         }
 
-        @keyframes gradientShift {
+        @keyframes textGradientFlow {
             0% { background-position: 0% 50%; }
-            100% { background-position: 200% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
+        /* 正文文字的蓝紫色渐变流动效果 */
         .birthday-text {
             font-family: 'Comic Sans MS', 'Comic Sans', cursive, 'Arial', sans-serif;
             font-size: 1.5rem;
             background: linear-gradient(45deg, 
-                #6a5acd, #7b68ee, #9370db, #8a2be2, #6a5acd, #7b68ee, #9370db);
+                #1e3c72, #2a5298, #3a7bd5, #00d2ff,
+                #1e3c72, #2a5298, #3a7bd5, #00d2ff);
+            background-size: 400% 400%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             margin-bottom: 20px;
             line-height: 1.6;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-            animation: textGlow 3s ease-in-out infinite alternate;
+            animation: bluePurpleFlow 6s linear infinite;
         }
 
-        @keyframes textGlow {
-            from { text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1), 0 0 10px rgba(106, 90, 205, 0.3); }
-            to { text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1), 0 0 20px rgba(106, 90, 205, 0.5); }
+        @keyframes bluePurpleFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         .message {
             font-family: 'Comic Sans MS', 'Comic Sans', cursive, 'Arial', sans-serif;
             background: linear-gradient(45deg, 
-                #6a5acd, #7b68ee, #9370db, #8a2be2, #6a5acd, #7b68ee, #9370db);
+                #6a5acd, #7b68ee, #9370db, #8a2be2, 
+                #6a5acd, #7b68ee, #9370db, #8a2be2);
+            background-size: 400% 400%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -127,15 +138,22 @@
             font-size: 1.2rem;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
             margin-bottom: 20px;
+            animation: messageFlow 5s linear infinite;
+        }
+
+        @keyframes messageFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         .music-player {
             position: absolute;
-            top: -200px; /* 移到屏幕外 */
-            left: -200px; /* 移到屏幕外 */
-            opacity: 0; /* 完全透明 */
-            pointer-events: none; /* 不响应鼠标事件 */
-            z-index: -1; /* 移到最底层 */
+            top: -200px;
+            left: -200px;
+            opacity: 0;
+            pointer-events: none;
+            z-index: -1;
         }
 
         /* 横屏适配 */
@@ -222,7 +240,7 @@
     <!-- 生日页面 -->
     <div class="birthday-container" id="birthdayContainer">
         <div class="content">
-            <h1>生日快乐！🎉</h1>
+            <h1>生日快乐！</h1>
             <div class="birthday-text">
                 愿你的每一天都像今天一样充满欢笑和幸福！
             </div>
@@ -230,7 +248,7 @@
                 愿所有的美好都如约而至，所有的梦想都能实现！
             </div>
             <div class="message">
-                祝你拥有一个难忘的生日！🎈
+                华风夏韵洛水天依
             </div>
             
             <div class="music-player">
@@ -246,11 +264,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             // 背景图片数组
             const backgroundImages = [
-                'https://img.alicdn.com/imgextra/i1/O1CN01kZ5v6L1dR4z6X2X9W_!!6000000003542-2-tps-1920-1080.png',
-                'https://img.alicdn.com/imgextra/i2/O1CN01j2X4Y91dR4z6X2X9X_!!6000000003543-2-tps-1920-1080.png',
-                'https://img.alicdn.com/imgextra/i3/O1CN01kZ5v6L1dR4z6X2X9Y_!!6000000003544-2-tps-1920-1080.png',
-                'https://img.alicdn.com/imgextra/i4/O1CN01j2X4Y91dR4z6X2X9Z_!!6000000003545-2-tps-1920-1080.png',
-                'https://img.alicdn.com/imgextra/i5/O1CN01kZ5v6L1dR4z6X2X9A_!!6000000003546-2-tps-1920-1080.png'
+                'https://www.duitang.com/blog/?id=1491389300'
             ];
             
             // 获取背景容器元素
@@ -339,3 +353,5 @@
     </script>
 </body>
 </html>
+
+
